@@ -1,16 +1,28 @@
-@font-face {
-    font-family: "Jetbrains Mono";
-    font-weight: 400;
-    src: url("./fonts/JetBrainsMono-Regular.ttf") format("truetype");
-   }
-   
+/**
+ * Ce fichier permet de décrire les variables CSS utilisées dans tout le projet (e.g. des couleurs),
+ * d'importer des polices d'écritures et d'appliquer du style a tous les éléments du DOM (i.e. browser reset)
+*/
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@font-face {
+  font-family: "Jetbrains Mono";
+  font-weight: 400;
+  src: url("./fonts/JetBrainsMono-Regular.ttf") format("truetype");
 }
 
 :root {
-    font-family: sans-serif;
+  font-family: sans-serif;
+
+  --card-red : #C03C3C;
+  --card-black: #222228;
+  --card-bg: #E8E8E2;
+  --card-back: #062257;
+  --card-outline: #C5A230;
+  --baize-green : #174421;
+  --chalk-white : rgba(255,255,255,0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

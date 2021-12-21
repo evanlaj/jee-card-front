@@ -2,8 +2,6 @@ import './css/Card.css';
 import React from 'react';
 
 class CardPile extends React.Component {
-
-  cardList;
   
   constructor({cards}) {
     super();
@@ -16,8 +14,8 @@ class CardPile extends React.Component {
 
     let oldList = [...this.cardList];
 
-    while(oldList.length != 0) {
-        let cardIndex = Math.random() * oldList.length;
+    while(oldList.length !== 0) {
+        let cardIndex = Math.floor(Math.random() * oldList.length);
         let card = oldList[cardIndex];
         oldList.splice(cardIndex, 1);
 
@@ -28,7 +26,7 @@ class CardPile extends React.Component {
   }
 
   shiftCard() {
-      if(this.cardList.length == 0) return null;
+      if(this.cardList.length === 0) return null;
 
       let card = this.cardList[0];
       this.cardList.shift();
@@ -40,9 +38,13 @@ class CardPile extends React.Component {
     this.cardList.push(card);
   }
 
+  getNbCard() {
+    return this.cardList.length;
+  }
+
   render() {
     return (
-        <div className="card-pile"></div>
+        <div className={"card-pile c" + this.cardList.length + "-left"}></div>
     );
   }
 
