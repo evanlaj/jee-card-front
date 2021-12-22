@@ -4,7 +4,7 @@ import { getFullDeck } from '../scripts/cards-util';
 import Card from '../components/Card';
 import CardPile from '../components/CardPile';
 
-import './css/App.css';
+import './css/TestApp.css';
 
 class App extends React.Component {
 
@@ -28,8 +28,6 @@ class App extends React.Component {
     newCard.visible = false;
     newCard.key = Math.random();
     this.currentCard = newCard;
-
-    this.newCardButton.current.setAttribute("nbcard", this.cardPile.current.getNbCard());
     
     this.forceUpdate();
   }
@@ -43,14 +41,13 @@ class App extends React.Component {
     this.cardPile.current.shufflePile();
 
     this.newCardButton.current.addEventListener("click", () => { this.newCard() });
-    this.newCardButton.current.setAttribute("nbcard", this.cardPile.current.getNbCard());
     this.showCardButton.current.addEventListener("click", () => { this.showCard() });
   }
 
   render() {
     return (
       <div className="App">
-            <div className="show-card" ref={this.newCardButton}><CardPile ref={this.cardPile} cards={this.pile}/></div>
+            <div ref={this.newCardButton}><CardPile ref={this.cardPile} cards={this.pile}/></div>
             <div className="card-slot" ref={this.showCardButton}>{ this.currentCard ?
               <Card key={this.currentCard.key} color={this.currentCard.color} value={this.currentCard.value} visible={this.currentCard.visible} /> : ""
             }</div>

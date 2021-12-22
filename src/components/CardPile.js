@@ -1,12 +1,13 @@
-import './css/Card.css';
+import './css/CardPile.css';
 import React from 'react';
 
 class CardPile extends React.Component {
   
-  constructor({cards}) {
+  constructor({cards, showCounter = true}) {
     super();
 
     this.cardList = cards;
+    this.showCounter = showCounter;
   }
 
   shufflePile() {
@@ -43,9 +44,11 @@ class CardPile extends React.Component {
   }
 
   render() {
-    return (
-        <div className={"card-pile c" + this.cardList.length + "-left"}></div>
-    );
+    
+    let cardPile = (<div className={"card-pile c" + this.cardList.length + "-left"}></div>);
+    
+    if (this.showCounter) return (<div className="show-card" nbcard={this.cardList.length}>{cardPile}</div>);
+    else return cardPile;
   }
 
 }
