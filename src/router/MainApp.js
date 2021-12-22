@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import TestApp from '../pages/TestApp'
+import BlackJackApp from '../pages/BlackJackApp'
 
 function MainApp() {
   return (
@@ -10,6 +11,7 @@ function MainApp() {
         <Routes>
           <Route exact path='/pile' element={<TestApp />}></Route>
           <Route exact path='/memory' element={<TestApp />}></Route>
+          <Route exact path='/blackjack' element={<BlackJackApp />}></Route>
         </Routes>
       </BrowserRouter>
       {/* ON PEUT METTRE DES CHOSES APRÈS */}
