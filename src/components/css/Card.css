@@ -5,6 +5,8 @@
     width: 176px;
 
     animation: card-appear 0.25s ease-out both;
+
+    user-select: none;
 }
 
 .card {
@@ -43,16 +45,17 @@
 
 .card-icon {
   position: absolute;
+  text-align: center;
 }
 
 .card-icon:first-child {
-  top: 11px;
-  left: 11px;
+  top: 10px;
+  left: 10px;
 }
 
 .card-icon:last-child {
-    bottom: 11px;
-    right: 11px;
+    bottom: 10px;
+    right: 10px;
     transform: rotate(180deg);
 }
 
@@ -70,7 +73,7 @@
     top: 50%;
     transform: translateY(-50%);
     width: 100%;
-    font-size: 162px;
+    font-size: 156px;
     text-align: center;
 }
 
