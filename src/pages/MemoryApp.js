@@ -1,8 +1,9 @@
-import './css/App.css';
+import React from 'react';
+
 import Card from '../components/Card';
 import CardPile from '../components/CardPile';
 
-import React from 'react';
+import './css/MemoryApp.css';
 
 class MemoryApp extends React.Component {
   
