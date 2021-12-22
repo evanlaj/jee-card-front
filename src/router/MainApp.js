@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import TestApp from '../pages/TestApp'
+import TestApp from '../pages/TestApp';
+import MemoryApp from '../pages/MemoryApp';
 
 function MainApp() {
   return (
@@ -9,7 +10,7 @@ function MainApp() {
       <BrowserRouter>
         <Routes>
           <Route exact path='/pile' element={<TestApp />}></Route>
-          <Route exact path='/memory' element={<TestApp />}></Route>
+          <Route exact path='/memory' element={<MemoryApp />}></Route>
         </Routes>
       </BrowserRouter>
       {/* ON PEUT METTRE DES CHOSES APRÈS */}
