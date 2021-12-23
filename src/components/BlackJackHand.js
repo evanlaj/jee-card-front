@@ -5,9 +5,12 @@ import Card from './Card';
 
 class BlackJackHand extends React.Component {
 
-  constructor(props) {
+  constructor({showTotalValue = false, dealerHand = false}) {
     super();
     
+    this.showTotalValue = showTotalValue;
+    this.secondHidden = dealerHand;
+
     this.cardList = [];
     this.cardsValue = 0;
   }
@@ -33,24 +36,37 @@ class BlackJackHand extends React.Component {
     return this.cardList.length;
   }
 
+  getValue() {
+    return this.cardsValue;
+  }
+
+  reveal() {
+    this.secondHidden = false;
+  }
+
   render() {
 
-    this.pushCard({ color:"♦", value:"7" });
-    this.pushCard({ color:"♠", value:"2" });
-    this.pushCard({ color:"♥", value:"K" });
-    this.pushCard({ color:"♣", value:"1" });
-
     let hand = [];
-
-    for(let card of this.cardList) {
-      hand.push(<Card key={Math.random()} color={card.color} value={card.value} />);
+    let handValue = this.cardsValue;
+    
+    if(this.secondHidden && this.cardList.length === 2) {
+      hand.push(<Card key={0} color={this.cardList[0].color} value={this.cardList[0].value}/>);
+      hand.push(<Card key={1} visible={false}/>);
+      handValue = this.cardList[0].bjValue + " + ?";
+    }
+    else for(let i = 0; i < this.cardList.length; i++) {
+      let card = this.cardList[i];
+      hand.push(<Card key={i} color={card.color} value={card.value} />);
     }
 
-    return (
-      <div className="bj-hand-wrapper" cards-value={this.cardsValue}>
-        <div className="bj-hand">{hand}</div>
-      </div>
-    );
+    if (this.showTotalValue) 
+      return (
+        <div className="bj-hand-wrapper" cards-value={handValue} >
+          <div className="bj-hand">{hand}</div>
+        </div>
+      );
+    else
+      return (<div className="bj-hand">{hand}</div>);
   }
 
 }
