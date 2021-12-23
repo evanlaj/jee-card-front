@@ -57,6 +57,7 @@ function getFullDeck() {
   return [...DECK];
 }
 
+//Deprecated, use getShuffle(getFullDeck()) for same effect
 function getShuffledDeck() { 
   let newList = [];
 
@@ -73,4 +74,30 @@ function getShuffledDeck() {
   return newList;
 }
 
-export { getFullDeck, getShuffledDeck };
+//Return a NEW deck which is a shuffle from the original deck
+function getShuffle(deck) {
+  let newList = [];
+
+  let oldList = [...deck];
+
+  while(oldList.length !== 0) {
+      let cardIndex = Math.floor(Math.random() * oldList.length);
+      let card = oldList[cardIndex];
+      oldList.splice(cardIndex, 1);
+
+      newList.push(card);
+  }
+
+  return newList;
+}
+
+function getMultipleDecks(nbDecks) {
+  let newList = [];
+
+  for(let i = 0; i < nbDecks; i++)
+    newList = newList.concat([...DECK]);
+
+  return newList;
+}
+
+export { getFullDeck, getShuffledDeck, getMultipleDecks, getShuffle };
