@@ -9,6 +9,7 @@ class BlackJackHand extends React.Component {
     super();
     
     this.showTotalValue = showTotalValue;
+    this.dealerHand = dealerHand;
     this.secondHidden = dealerHand;
 
     this.cardList = [];
@@ -42,6 +43,16 @@ class BlackJackHand extends React.Component {
 
   reveal() {
     this.secondHidden = false;
+  }
+
+  emptyHand() {
+    let tempList = [...this.cardList];
+
+    this.secondHidden = this.dealerHand;
+    this.cardList = [];
+    this.cardsValue = 0;
+
+    return tempList;
   }
 
   render() {

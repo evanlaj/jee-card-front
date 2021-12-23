@@ -4,24 +4,29 @@ import { delay } from '../scripts/anim-util';
 
 import BlackJackHand from '../components/BlackJackHand';
 import CardPile from '../components/CardPile';
+import EndModal from '../components/EndModal';
 
 import './css/BlackJackApp.css';
 
 class BlackJackApp extends React.Component {
-
-  //dealer stands at 17
 
   constructor() {
     super();
     this.pile = getShuffle(getMultipleDecks(6));
     this.pile.splice(-52, 52); //cut the bottom to prevent card counting
 
+    this.leftovers = [];
+
     //Custom card pile for testing purpose
     /*this.pile = [
       { color:"♥", value:"10"},
       { color:"♥", value:"10"},
       { color:"♥", value:"10"},
-      { color:"♥", value:"1"},
+      { color:"♥", value:"10"},
+      { color:"♥", value:"10"},
+      { color:"♥", value:"10"},
+      { color:"♥", value:"10"},
+      { color:"♥", value:"10"},
     ];*/
 
     this.dealerHand = React.createRef();
@@ -30,6 +35,8 @@ class BlackJackApp extends React.Component {
 
     this.hitButton = React.createRef();
     this.standButton = React.createRef();
+
+    this.endModalInfo = {title: "", info: "", show: false};
   }
 
   componentDidMount() {
@@ -45,20 +52,26 @@ class BlackJackApp extends React.Component {
 
   async startGame() {
 
+    //reset last game
+    this.endModalInfo.show = false;
+    this.forceUpdate();
+    this.leftovers = this.leftovers.concat(this.playerHand.current.emptyHand());
+    this.leftovers = this.leftovers.concat(this.dealerHand.current.emptyHand());
+    
     this.playerCanPlay = false;
     //draw player hand
-    this.playerHand.current.pushCard(this.cardPile.current.shiftCard());
+    this.playerHand.current.pushCard(this.drawCard());
     this.forceUpdate();
     await delay(500);
-    this.playerHand.current.pushCard(this.cardPile.current.shiftCard());
+    this.playerHand.current.pushCard(this.drawCard());
     this.forceUpdate();
     await delay(500);
 
     //draw dealer hand
-    this.dealerHand.current.pushCard(this.cardPile.current.shiftCard());
+    this.dealerHand.current.pushCard(this.drawCard());
     this.forceUpdate();
     await delay(500);
-    this.dealerHand.current.pushCard(this.cardPile.current.shiftCard());
+    this.dealerHand.current.pushCard(this.drawCard());
     this.forceUpdate();
 
     //check for blackjack before allowing the player to play
@@ -79,7 +92,7 @@ class BlackJackApp extends React.Component {
     //prevent spamming
     this.playerCanPlay = false;
 
-    this.playerHand.current.pushCard(this.cardPile.current.shiftCard());
+    this.playerHand.current.pushCard(this.drawCard());
     this.forceUpdate();
     await delay(500);
 
@@ -114,7 +127,7 @@ class BlackJackApp extends React.Component {
     let dealerScore = this.dealerHand.current.getValue();
 
     while((dealerScore < playerScore) || (dealerScore == playerScore && dealerScore < 17)) {
-      this.dealerHand.current.pushCard(this.cardPile.current.shiftCard());
+      this.dealerHand.current.pushCard(this.drawCard());
       dealerScore = this.dealerHand.current.getValue();
       this.forceUpdate();
       await delay(500);
@@ -123,7 +136,7 @@ class BlackJackApp extends React.Component {
     this.showEndModal();
   }
 
-  showEndModal() {
+  async showEndModal() {
     this.dealerHand.current.reveal();
     this.forceUpdate();
 
@@ -132,10 +145,39 @@ class BlackJackApp extends React.Component {
 
     let playerWon = (playerScore < 22 && playerScore > dealerScore) || (dealerScore > 21);
 
-    console.log("The player " + (playerWon ? "won ": "lost ") + "the game." );
+    await delay(500);
+    this.endModalInfo.info = "Vous avez " + (playerWon ? "gagné":"perdu") +" avec un score de " + playerScore + " à " + dealerScore + ".";
+    this.endModalInfo.title = "Victoire";
+    this.endModalInfo.show = true;
+
+    if(playerScore == dealerScore) {
+      this.endModalInfo.info = "Il y a égalité (" + playerScore + " partout).";
+      this.endModalInfo.title = "Égalité";
+    }
+
+    this.forceUpdate();
+  }
+
+  drawCard() {
+    let card = this.cardPile.current.shiftCard();
+
+    if(card) return card;
+
+    let newPile = getShuffle(this.leftovers);
+
+    this.cardPile.current.pushCards(newPile);
+    this.leftovers = [];
+
+    return this.drawCard();
   }
 
   render() {
+
+    let endModal = null;
+    
+    if(this.endModalInfo.show)
+      endModal = (<EndModal actionReplay={() => this.startGame()} info={this.endModalInfo.info}/>);
+
     return (
       <div className="BlackJackApp">
         <svg id="logo-blackjack" width="623" height="173" viewBox="0 0 623 173" >
@@ -159,7 +201,7 @@ class BlackJackApp extends React.Component {
             <div ref={this.standButton} className="stand-button" icon="-" label='Refuser'></div>
           </div>
         </div>
-
+        {endModal}
       </div>
     )
   }
