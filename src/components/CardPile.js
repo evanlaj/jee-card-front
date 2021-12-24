@@ -27,6 +27,14 @@ class CardPile extends React.Component {
     this.cardList = this.cardList.concat(cards);
   }
 
+  emptyPile() {
+    let tempList = [...this.cardList];
+
+    this.cardList = [];
+
+    return tempList;
+  }
+
   getNbCard() {
     return this.cardList.length;
   }
