@@ -1,0 +1,107 @@
+.WarApp {
+  background-color: var(--baize-green);
+  min-height: 100vh;
+}
+
+#logo-war {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.65);
+  fill: var(--chalk-white);
+}
+
+.opponent-card-pile {
+  position: absolute;
+  left: 50%;
+  top: 62px;
+
+  transform: translate(-426px);
+}
+
+.player-card-pile {
+  position: absolute;
+  left: 50%;
+  bottom: 84px;
+
+  transform: translate(250px);
+
+  display: flex;
+}
+
+.opponent-board, .player-board {
+  position: absolute;
+  left: 50%;
+
+  transform: translate(-50%);
+}
+
+.opponent-board { top: 62px; }
+.player-board { bottom: 84px; }
+
+.war-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ========== PLAYER BUTTONS ========== */
+
+.player-menu {
+  position: relative;
+  width: 42px;
+  margin-left: 20px;
+}
+
+.play-button {
+  cursor: pointer;
+  position: absolute;
+  background: var(--chalk-white);
+  color: var(--baize-green);
+
+  height: 42px;
+  width: 42px;
+  overflow: hidden;
+
+  border-radius: 21px;
+
+  box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.1);
+
+  font-size: 18px;
+  font-family: 'Jetbrains Mono';
+
+  transition: all 0.2s ease;
+}
+
+.play-button:before {
+  content: '';
+  position: absolute;
+  top: 21.2px;
+  left: 26px;
+  transform: translate(-50%, -50%);
+  height: 0;
+  width: 0;
+
+  border: 8px solid transparent;
+  border-left: 12px solid currentColor;
+}
+
+.play-button:after {
+  position: absolute;
+  top: 0;
+  left: 42px;
+  content: attr(label);
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-button:hover {
+  background: var(--card-bg);
+  color: var(--card-black);
+  width: 118px;
+}
+
