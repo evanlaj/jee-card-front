@@ -48,7 +48,8 @@ class WarApp extends React.Component {
   initPiles() {
     let pile = getShuffle(getFullDeck());
 
-    pile = getShuffle([
+    //Custom pile for testing purpose
+    /*pile = getShuffle([
       { color:"♦", value:"1" },
       { color:"♦", value:"2" },
       { color:"♦", value:"1" },
@@ -57,7 +58,7 @@ class WarApp extends React.Component {
       { color:"♦", value:"2" },
       { color:"♦", value:"1" },
       { color:"♦", value:"2" }
-    ]);
+    ]):*/
 
     let playerPile = pile.slice(0, pile.length/2);
     let opponentPile = pile.slice(pile.length/2, pile.length);
