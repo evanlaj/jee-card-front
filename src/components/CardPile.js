@@ -10,22 +10,6 @@ class CardPile extends React.Component {
     this.showCounter = showCounter;
   }
 
-  shufflePile() {
-    let newList = [];
-
-    let oldList = [...this.cardList];
-
-    while(oldList.length !== 0) {
-        let cardIndex = Math.floor(Math.random() * oldList.length);
-        let card = oldList[cardIndex];
-        oldList.splice(cardIndex, 1);
-
-        newList.push(card);
-    }
-
-    this.cardList = newList;
-  }
-
   shiftCard() {
       if(this.cardList.length === 0) return null;
 
@@ -37,6 +21,18 @@ class CardPile extends React.Component {
 
   pushCard(card) {
     this.cardList.push(card);
+  }
+
+  pushCards(cards) {
+    this.cardList = this.cardList.concat(cards);
+  }
+
+  emptyPile() {
+    let tempList = [...this.cardList];
+
+    this.cardList = [];
+
+    return tempList;
   }
 
   getNbCard() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getFullDeck } from '../scripts/cards-util';
+import { getShuffle, getFullDeck } from '../scripts/cards-util';
 
 import Card from '../components/Card';
 import CardPile from '../components/CardPile';
@@ -8,7 +8,7 @@ import './css/TestApp.css';
 
 class App extends React.Component {
 
-  pile = getFullDeck();
+  pile = getShuffle(getFullDeck());
   
   currentCard;
   cardPile;
@@ -38,8 +38,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.cardPile.current.shufflePile();
-
     this.newCardButton.current.addEventListener("click", () => { this.newCard() });
     this.showCardButton.current.addEventListener("click", () => { this.showCard() });
   }

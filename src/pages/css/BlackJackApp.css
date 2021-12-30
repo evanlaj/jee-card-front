@@ -1,0 +1,128 @@
+.BlackJackApp {
+  background-color: var(--baize-green);
+  min-height: 100vh;
+}
+
+#logo-blackjack {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.65);
+  fill: var(--chalk-white);
+}
+
+.bj-card-pile {
+  position: absolute;
+  left: 50%;
+  top: 62px;
+
+  transform: translate(-456px);
+
+}
+
+.dealer-hand {
+  position: absolute;
+  left: 50%;
+  top: 62px;
+
+  transform: translate(-50%);
+}
+
+.player-hand {
+  position: absolute;
+  left: 50%;
+  bottom: 84px;
+
+  transform: translate(-50%);
+
+  padding-left: 62px;
+
+  display: flex;
+}
+
+/* ========== FAKE HANDS (CURRENTLY REMOVED) ========== */
+
+.fake-hand {
+  top: 45%;
+  position: absolute;
+  bottom: 25vh;
+}
+
+.f1 {
+  left: 24px;
+  transform: rotate(50deg) scale(0.8);
+}
+
+.f2 {
+  right: 24px;
+  transform: rotate(-50deg) scale(0.8);
+}
+
+/* ========== PLAYER BUTTONS ========== */
+
+.player-menu {
+  position: relative;
+  width: 42px;
+  margin-left: 20px;
+}
+
+.hit-button, .stand-button {
+  cursor: pointer;
+  position: absolute;
+  background: var(--chalk-white);
+  color: var(--baize-green);
+
+  height: 42px;
+  width: 42px;
+  overflow: hidden;
+
+  border-radius: 21px;
+
+  box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.1);
+
+  font-size: 18px;
+  font-family: 'Jetbrains Mono';
+
+  transition: all 0.2s ease;
+}
+
+.hit-button:before, .stand-button:before {
+  content: attr(icon);
+  height: 42px;
+  width: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 20px;
+}
+
+.hit-button:after, .stand-button:after {
+  position: absolute;
+  top: 0;
+  left: 42px;
+  content: attr(label);
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stand-button {
+  top: 62px;
+}
+
+.hit-button:hover, .stand-button:hover {
+  background: var(--card-bg);
+  color: var(--card-black);
+}
+
+.hit-button:hover {
+  width: 118px;
+}
+
+.stand-button:hover {
+  width: 138px;
+}
