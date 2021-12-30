@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Card from '../components/Card';
-import { getShuffledMemoryDeck } from '../scripts/cards-util';
+import MemoryCardWrapper from '../components/MemoryCardWrapper';
+import { getShuffle, getMemoryDeck } from '../scripts/cards-util';
 
 import './css/MemoryApp.css';
 
@@ -13,8 +13,7 @@ class MemoryApp extends React.Component {
   choiceTwo;
   currentCard;
   cardElements;
-
-  showCardButton;
+  memoryCardList;
 
   constructor() {
     super();
@@ -24,7 +23,13 @@ class MemoryApp extends React.Component {
     this.choiceTwo   = null;
     this.cardElements = [];
 
-    this.memoryCardWrappers = React.createRef([]);
+    this.memoryCardWrappers = [];
+
+    this.memoryCardList = [];
+    for(let i = 0; i < 12; i++) {
+      this.memoryCardList.push(<MemoryCardWrapper ref={(elem) => this.memoryCardWrappers.push(elem)}/>)
+    }
+    
   }
 
   showCard(card) {
@@ -36,31 +41,23 @@ class MemoryApp extends React.Component {
 
   // called everytime we start a new game using the button, gets a shuffled deck and nbTurn goes back to 0
   startGame() {
-    this.cards = getShuffledMemoryDeck();
+    this.cards = getShuffle(getMemoryDeck());
     this.nbTurns = 0;
-    this.cardElements = [];
 
-    for(let i = 0; i < this.cards.length; i++){
-      this.cardElements.push((
-        <div className="memory-card-wrapper">
-          <Card color={this.cards[i].color} value={this.cards[i].value} visible={this.cards[i].visible} />
-        </div>
-      ));
-      console.log(this.cardElements[i]);
-      //this.cardElements[i].addEventListener("click", () => { this.showCard(this.cards[i]) });
+    for(let i = 0; i < this.cards.length; i++) {
+      this.memoryCardWrappers[i].setCard(this.cards[i]);
     }
   
     this.forceUpdate();
   }
 
   render() {
-       
     return (
       <div className="App">
         <h1>Memory</h1>
         <button onClick={() => this.startGame()}>New Game</button>
-        <div className="card-grid" ref={this.showCardButton}>
-          {this.cardElements}
+        <div className="card-grid">
+          {this.memoryCardList}
         </div>
       </div>
     );

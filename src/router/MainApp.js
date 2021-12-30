@@ -12,7 +12,7 @@ function MainApp() {
       <BrowserRouter>
         <Routes>
           <Route exact path='/pile'      element={<TestApp />}      />
-          <Route exact path='/memory'    element={<TestApp />}      />
+          <Route exact path='/memory'    element={<MemoryApp />}      />
           <Route exact path='/blackjack' element={<BlackJackApp />} />
           <Route exact path='/war'       element={<WarApp />}       />
         </Routes>

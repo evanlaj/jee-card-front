@@ -62,13 +62,17 @@ const MEMORY_DECK = [
   {value:'8', color:'♠', visible:false}
 ];
 
-function getShuffledMemoryDeck() {
+/*function getShuffledMemoryDeck() {
    // duplicating the cards
    let shuffledCards = [...MEMORY_DECK, ...MEMORY_DECK]
    .sort(() => Math.random() - 0.5)
    .map((card) => ({...card, key: Math.random()})) // add an id to every card
 
    return shuffledCards;
+}*/
+
+function getMemoryDeck() {
+  return [...MEMORY_DECK].concat([...MEMORY_DECK]);
 }
 
 function getFullDeck() {
@@ -118,4 +122,4 @@ function getMultipleDecks(nbDecks) {
   return newList;
 }
 
-export { getFullDeck, getShuffledDeck, getMultipleDecks, getShuffle, getShuffledMemoryDeck };
+export { getFullDeck, getShuffledDeck, getMultipleDecks, getShuffle, getMemoryDeck };
