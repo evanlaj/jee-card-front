@@ -1,7 +1,8 @@
 import './css/Card.css';
 
 function Card({value, color, visible =  true}) {
-  return (
+  
+    return (
       <div className="card-wrapper">
           <div className={"card " + (visible ? "visible":"")}>
             <div className={"card-front " + (color === "♦" || color === "♥" ? "red":"black")}>
