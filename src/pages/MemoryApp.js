@@ -9,19 +9,10 @@ class MemoryApp extends React.Component {
 
   cards = [];
   nbTurns = 0;
-  choiceOne;
-  choiceTwo;
-  currentCard;
-  cardElements;
   memoryCardList;
 
   constructor() {
     super();
-
-    this.currentCard = null;
-    this.choiceOne   = null;
-    this.choiceTwo   = null;
-    this.cardElements = [];
 
     this.memoryCardWrappers = [];
 
@@ -30,13 +21,6 @@ class MemoryApp extends React.Component {
       this.memoryCardList.push(<MemoryCardWrapper ref={(elem) => this.memoryCardWrappers.push(elem)}/>)
     }
     
-  }
-
-  showCard(card) {
-    console.log("bonjour");
-    if(card == null) return;
-    this.card.visible = true;
-    this.forceUpdate();
   }
 
   // called everytime we start a new game using the button, gets a shuffled deck and nbTurn goes back to 0
