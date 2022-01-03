@@ -1,0 +1,72 @@
+#header {
+  position: absolute;
+  z-index: 10000;
+  top: 0;
+  right: 0;
+
+  height: 52px;
+  width: 52px;
+}
+
+.header-open {
+  width: 100% !important;
+}
+
+.header-button {
+  position: absolute;
+  cursor: pointer;
+  top: 16px;
+  right: 16px;
+
+  height: 36px;
+  width: 36px;
+
+  border: none;
+  background: none;
+}
+
+.header-button:focus, .header-button:hover {
+  outline: none;
+}
+
+.header-button:focus > .header-bar, .header-button:hover > .header-bar {
+  background: var(--card-bg);
+}
+
+.header-bar {
+  position: absolute;
+  height: 2px;
+  width: calc(100% - 12px);
+  left: 5px;
+
+  background: var(--chalk-white);
+
+  transition: all 0.2s ease-in-out;
+}
+
+.bar1 {
+  top: 50%;
+  transform: translateY(calc(-50% - 8px));
+}
+
+.bar2 {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bar3 {
+  top: 50%;
+  transform: translateY(calc(-50% + 8px));
+}
+
+.header-open .bar1 {
+  transform: translateY(calc(-50%)) rotate(45deg);
+}
+
+.header-open .bar2 {
+  opacity: 0;
+}
+
+.header-open .bar3 {
+  transform: translateY(calc(-50%)) rotate(-45deg);
+}
