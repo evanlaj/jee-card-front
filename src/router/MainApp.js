@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Header from '../components/Header';
+import HomePageApp from '../pages/HomePageApp';
 import TestApp from '../pages/TestApp';
 import BlackJackApp from '../pages/BlackJackApp';
 import WarApp from '../pages/WarApp';
@@ -29,6 +30,7 @@ class MainApp extends React.Component {
         <BrowserRouter>
           <Header open={this.headerOpen} buttonAction={this.toggleHeader}/>
           <Routes>
+            <Route exact path='/'          element={<HomePageApp />}      />
             <Route exact path='/pile'      element={<TestApp />}      />
             <Route exact path='/memory'    element={<TestApp />}      />
             <Route exact path='/blackjack' element={<BlackJackApp />} />
