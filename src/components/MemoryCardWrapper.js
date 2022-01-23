@@ -7,7 +7,9 @@ class MemoryCardWrapper extends React.Component {
   constructor() {
       super();
 
-      this.choiceOne = null;
+      this.state = {
+        choiceOne : null
+      };
   }
   
   setCard(card) {
@@ -15,27 +17,51 @@ class MemoryCardWrapper extends React.Component {
     this.forceUpdate();
   }
 
-  toggleVisible() {
+  async toggleVisible() {
     if(!this.currentCard) return;
 
-    if(this.choiceOne == null && !this.currentCard.visible) { this.currentCard.visible = true; this.choiceOne = this.currentCard; console.log(this.choiceOne);}
-    console.log(this.choiceOne);
-    if(this.choiceOne != null && !this.currentCard.visible) {
-        this.currentCard.visible= true;
-        if ((!this.choiceOne.color === this.currentCard.color) && (this.choiceOne.value === this.currentCard.value)) {
-            setTimeout(function() { this.setState({render: true})}.bind(this), 1000); // timer of one second
-            this.choiceOne.visible = false;
-            this.currentCard.visible = false;
-            this.choiceOne = null;
-            this.forceUpdate();
-        }
+    //if it's the first card we chose in a pair
+    if(this.state.choiceOne == null && !this.currentCard.visible) { 
+      this.currentCard.visible = true;
+      let currCard = this.currentCard;
+      this.setState((state) => ({ 
+          choiceOne: currCard
+      }), () => {console.log(this.state.choiceOne);});
     }
-    this.forceUpdate();
+    console.log(this.state.choiceOne);
+
+    //if it's the second card we choose in a pair
+    if(this.state.choiceOne != null && !this.currentCard.visible) {
+        this.currentCard.visible= true;
+        //if it's the wrong pair
+        if ((this.state.choiceOne.color !== this.currentCard.color) || (this.choiceOne.value !== this.currentCard.value)) {
+          setTimeout(function() { this.setState({render: true})}.bind(this), 1000); // timer of one second
+          this.currentCard.visible = false;
+          let firstChoice = this.state.choiceOne;
+          firstChoice.visible = false;
+          this.setState((state) => ({ 
+            choiceOne: null
+          }));
+        }
+
+        //if it's the wright pair
+        if((this.state.choiceOne.color === this.currentCard.color) && (this.choiceOne.value === this.currentCard.value)) {
+          //gérer le score
+          this.setState((state) => ({ 
+            choiceOne: null
+          }));
+        }
+        
+    }
   }
 
   returnCard() {
     if(!this.currentCard) return null;
     return {...this.currentCard};
+  }
+
+  componentDidMount() {
+    this.toggleVisible();
   }
 
   render() {
