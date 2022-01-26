@@ -6,6 +6,7 @@ import HomePageApp from '../pages/HomePageApp';
 import TestApp from '../pages/TestApp';
 import BlackJackApp from '../pages/BlackJackApp';
 import WarApp from '../pages/WarApp';
+import LoginApp from '../pages/LoginApp';
 
 class MainApp extends React.Component {
   
@@ -30,11 +31,12 @@ class MainApp extends React.Component {
         <BrowserRouter>
           <Header open={this.headerOpen} buttonAction={this.toggleHeader}/>
           <Routes>
-            <Route exact path='/'          element={<HomePageApp />}      />
+            <Route exact path='/'          element={<HomePageApp />}  />
             <Route exact path='/pile'      element={<TestApp />}      />
             <Route exact path='/memory'    element={<TestApp />}      />
             <Route exact path='/blackjack' element={<BlackJackApp />} />
             <Route exact path='/war'       element={<WarApp />}       />
+            <Route exact path="/login"     element={<LoginApp />}     />
           </Routes>
         </BrowserRouter>
         {/* ON PEUT METTRE DES CHOSES APRÈS */}
