@@ -1,6 +1,9 @@
 import React from 'react';
 import { getShuffle, getMultipleDecks } from '../scripts/cards-util';
 import { delay } from '../scripts/anim-util';
+import { withRouter } from '../scripts/router_hoc';
+
+import { checkAvailability } from '../_actions/api_actions';
 
 import BlackJackHand from '../components/BlackJackHand';
 import CardPile from '../components/CardPile';
@@ -39,8 +42,22 @@ class BlackJackApp extends React.Component {
     this.endModalInfo = {title: "", info: "", show: false};
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    this.checkAccess();
     this.initBoard();
+  }
+
+  async checkAccess() {
+
+    let canAccess = localStorage.getItem('access_token');
+
+    canAccess = canAccess && (await checkAvailability("Black Jack"));
+
+    this.setState(() => ({
+      canAccess : canAccess
+    }), () => {
+      if(!this.state.canAccess) this.props.navigate("/");
+    });
   }
 
   async initBoard() {
@@ -171,12 +188,16 @@ class BlackJackApp extends React.Component {
     return this.drawCard();
   }
 
+  quitGame() {
+    this.props.navigate("/");
+  }
+
   render() {
 
     let endModal = null;
     
     if(this.endModalInfo.show)
-      endModal = (<EndModal actionReplay={() => this.startGame()} info={this.endModalInfo.info}/>);
+      endModal = (<EndModal actionReplay={() => this.startGame()} info={this.endModalInfo.info} actionQuit={() => this.quitGame()}/>);
 
     return (
       <div className="BlackJackApp">
@@ -207,4 +228,4 @@ class BlackJackApp extends React.Component {
   }
 }
 
-export default BlackJackApp;
+export default withRouter(BlackJackApp);

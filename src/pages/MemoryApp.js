@@ -2,6 +2,8 @@ import './css/App.css';
 import Card from '../components/Card';
 import CardPile from '../components/CardPile';
 
+import { withRouter } from '../scripts/router_hoc';
+
 import React from 'react';
 
 class MemoryApp extends React.Component {
@@ -52,4 +54,4 @@ class MemoryApp extends React.Component {
   }
 }
 
-export default MemoryApp;
+export default withRouter(MemoryApp);

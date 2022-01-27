@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
+import { getSession } from '../_actions/session';
+
 import Header from '../components/Header';
 import HomePageApp from '../pages/HomePageApp';
 import TestApp from '../pages/TestApp';
@@ -16,6 +18,9 @@ class MainApp extends React.Component {
   constructor() {
     super();
     this.toggleHeader = this.toggleHeader.bind(this);
+
+    this.state = {};
+
   }
   
   toggleHeader() {
@@ -24,13 +29,22 @@ class MainApp extends React.Component {
     document.activeElement.blur();
   }
 
+  async componentDidMount() {
+
+    let session = await getSession();
+
+    this.setState(() => ({
+      session: session
+    }));
+  }
+
   render () {
 
     return (
       <div>
         {/* ON PEUT METTRE DES CHOSES AVANT */}
         <BrowserRouter>
-          <Header open={this.headerOpen} buttonAction={this.toggleHeader}/>
+          <Header open={this.headerOpen} buttonAction={this.toggleHeader} session={this.state.session}/>
           <Routes>
             <Route exact path='/'          element={<HomePageApp />}  />
             <Route exact path='/pile'      element={<TestApp />}      />

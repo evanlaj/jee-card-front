@@ -1,6 +1,9 @@
 import React from 'react';
 import { getShuffle, getFullDeck } from '../scripts/cards-util';
 import { delay } from '../scripts/anim-util';
+import { withRouter } from '../scripts/router_hoc';
+
+import { checkAvailability } from '../_actions/api_actions';
 
 import WarBoard from '../components/WarBoard';
 import CardPile from '../components/CardPile';
@@ -27,8 +30,24 @@ class WarApp extends React.Component {
   }
 
   componentDidMount() {
+    this.checkAccess();
     this.playButton.current.addEventListener('click', () => this.playTurn());
     this.startGame();
+  }
+
+  async checkAccess() {
+
+    let canAccess = localStorage.getItem('access_token');
+
+    canAccess = canAccess && (await checkAvailability("War"));
+
+    this.setState(() => ({
+      canAccess : canAccess
+    }), () => {
+      if(!this.state.canAccess) this.props.navigate("/");
+    });
+
+    if(!localStorage.getItem('access_token')) this.props.navigate("/");
   }
 
   async startGame() {
@@ -169,11 +188,15 @@ class WarApp extends React.Component {
     this.forceUpdate();
   }
 
+  quitGame() {
+    this.props.navigate("/");
+  }
+
   render() {
 
     let endModal = null;
     if(this.endModalInfo.show)
-      endModal = (<EndModal actionReplay={() => this.startGame()} info={this.endModalInfo.info}/>);
+      endModal = (<EndModal actionReplay={() => this.startGame()} info={this.endModalInfo.info} actionQuit={() => this.quitGame()}/>);
 
     let warPopup = null;
     if(this.popupLabel != "")
@@ -209,4 +232,4 @@ class WarApp extends React.Component {
   }
 }
 
-export default WarApp;
+export default withRouter(WarApp);
