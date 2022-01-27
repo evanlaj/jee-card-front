@@ -7,6 +7,7 @@ import TestApp from '../pages/TestApp';
 import BlackJackApp from '../pages/BlackJackApp';
 import WarApp from '../pages/WarApp';
 import LoginApp from '../pages/LoginApp';
+import RegisterApp from '../pages/RegisterApp';
 
 class MainApp extends React.Component {
   
@@ -37,6 +38,7 @@ class MainApp extends React.Component {
             <Route exact path='/blackjack' element={<BlackJackApp />} />
             <Route exact path='/war'       element={<WarApp />}       />
             <Route exact path="/login"     element={<LoginApp />}     />
+            <Route exact path="/register"  element={<RegisterApp />}  />
           </Routes>
         </BrowserRouter>
         {/* ON PEUT METTRE DES CHOSES APRÈS */}
