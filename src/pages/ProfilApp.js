@@ -15,9 +15,9 @@ class ProfilApp extends React.Component {
   }
 
   async componentDidMount() {
-    this.checkAccess();
-
     let session = await getSession();
+    
+    this.checkAccess();
 
     getGameHistory().then((list) => { 
       this.setState(() => ({
