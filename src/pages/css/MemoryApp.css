@@ -1,0 +1,49 @@
+.MemoryApp {
+  text-align: center;
+  background-color: var(--baize-green);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+}
+
+#logo-memory {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.65);
+  fill: var(--chalk-white);
+}
+
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(6, 176px);
+  grid-template-rows: repeat(3, 240px);
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  height: 752px;
+  width: 1136px;
+  margin: 32px;
+  margin-right: 208px;
+}
+
+.memory-card-wrapper {
+  cursor: pointer !important;
+}
+
+.life-counter {
+  font-size: 14px;
+  font-family: 'Jetbrains Mono';
+  color: var(--card-bg);
+}
+
+.memory-left-panel {
+  height: 752px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-direction: column;
+}

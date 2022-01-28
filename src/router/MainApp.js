@@ -6,6 +6,7 @@ import { getSession } from '../_actions/session';
 import Header from '../components/Header';
 import HomePageApp from '../pages/HomePageApp';
 import TestApp from '../pages/TestApp';
+import MemoryApp from '../pages/MemoryApp';
 import BlackJackApp from '../pages/BlackJackApp';
 import WarApp from '../pages/WarApp';
 import LoginApp from '../pages/LoginApp';
@@ -50,7 +51,7 @@ class MainApp extends React.Component {
           <Routes>
             <Route exact path='/'               element={<HomePageApp />}  />
             <Route exact path='/pile'           element={<TestApp />}      />
-            <Route exact path='/memory'         element={<TestApp />}      />
+            <Route exact path='/memory'         element={<MemoryApp />}      />
             <Route exact path='/blackjack'      element={<BlackJackApp />} />
             <Route exact path='/war'            element={<WarApp />}       />
             <Route exact path="/login"          element={<LoginApp />}     />
