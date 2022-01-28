@@ -189,7 +189,7 @@ class WarApp extends React.Component {
   }
 
   quitGame() {
-    this.props.navigate("/");
+    this.props.navigate("/profil");
   }
 
   render() {
