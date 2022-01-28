@@ -46,7 +46,7 @@ function Header({open =  true, buttonAction = () => null, session = null}) {
               {blackJackAvailability && (<NavLink to="/blackjack"><Button label="Blackjack"/></NavLink>)}
               {memoryAvailability && (<NavLink to="/memory"><Button label="Memory"/></NavLink>)}
               {adminButton}
-              <NavLink to="/profil"><Button label="Profile"/></NavLink>
+              <NavLink to="/profil"><Button label="Profil"/></NavLink>
             </nav>
           }
       </div>

@@ -10,16 +10,16 @@
 #register-page {
   position: relative;
   height: 580px;
-  width: 460px;
+  width: 922px;
   background: var(--card-bg);
   border-radius: 10px;
   outline-offset: -20px;
 
+  padding: 20px;
   padding-top: 80px;
 
   display: flex;
-  gap: 60px;
-  flex-direction: column;
+  flex-direction: row;
 
   font-size: 18px;
   font-family: 'Jetbrains Mono';
@@ -41,6 +41,14 @@
   border-radius: 6px;
 
   border: 10px solid var(--baize-green);
+}
+
+.register-form {
+  height: 100%;
+  width: 460px;
+  display: flex;
+  gap: 60px;
+  flex-direction: column;
 }
 
 .form-input {
@@ -86,4 +94,26 @@
   padding: 0 4px;
   height: 12px;
   color: var(--baize-green);
+}
+
+.separator-register {
+  height: 85%;
+  width: 2px;
+  background: var(--card-black);
+}
+
+.password-rules-wrapper {
+  height: 85%;
+  width: 460px;
+}
+
+.password-rules {
+  margin-top: 20px;
+  padding: 40px;
+  text-align: left;
+}
+
+.password-rules > * {
+  margin-bottom: 22px;
+  font-size: 15px;
 }

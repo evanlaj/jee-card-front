@@ -9,6 +9,11 @@ import { delay } from '../scripts/anim-util';
 
 import './css/RegisterApp.css';
 
+const CONTAINS_LOWER_CASE = /(.*[a-z].*)/
+const CONTAINS_UPPER_CASE = /(.*[A-Z].*)/
+const CONTAINS_NUMBER     = /(.*[0-9].*)/
+const CONTAINS_8_OR_MORE  = /(.{8,50})/
+
 class RegisterApp extends React.Component {
   
   constructor() {
@@ -18,8 +23,16 @@ class RegisterApp extends React.Component {
     this.pwInput     = React.createRef();
 
     this.state = {
-      message:""
+      message: "",
+      pwContainsLowerCase: false,
+      pwContainsUpperCase: false,
+      pwContainsNumber: false,
+      pwContains8OrMore: false
     }
+  }
+
+  componentDidMount() {
+    this.pwInput.current.addEventListener('input', (e) => { this.checkPasswordValidity(); });
   }
   
   async register() {
@@ -27,10 +40,10 @@ class RegisterApp extends React.Component {
     let mail   = this.mailInput.current.value;
     let pw     = this.pwInput.current.value;
     
-    if(!this.checkForm()) return;
+    let success = this.checkForm();
 
 
-    let success = await saveUser(pseudo, mail, pw);
+    if(success) success = await saveUser(pseudo, mail, pw);
 
     if(success) {
       this.setState(() => ({ message: "Utilisateur enregistré !" }), () => { 
@@ -56,10 +69,32 @@ class RegisterApp extends React.Component {
     if(this.mailInput.current.value.length > 255) formValid = false;
     if(!this.mailInput.current.value.toLowerCase().match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    )) {formValid = false;console.log("ta mère la regex");}
-    if(this.pwInput.current.value.length > 255) formValid = false;
+    )) {formValid = false;}
+    if(this.pwInput.current.value.length > 50) formValid = false;
+
+    formValid = formValid && this.state.pwContainsLowerCase;
+    formValid = formValid && this.state.pwContainsUpperCase;
+    formValid = formValid && this.state.pwContainsNumber;
+    formValid = formValid && this.state.pwContains8OrMore;
 
     return formValid;
+  }
+
+  checkPasswordValidity() {
+
+    let value = this.pwInput.current.value;
+
+    let pwContainsLowerCase = value.match(CONTAINS_LOWER_CASE);
+    let pwContainsUpperCase = value.match(CONTAINS_UPPER_CASE);
+    let pwContainsNumber    = value.match(CONTAINS_NUMBER);
+    let pwContains8OrMore   = value.match(CONTAINS_8_OR_MORE);
+
+    this.setState(() => ({
+      pwContainsLowerCase: pwContainsLowerCase,
+      pwContainsUpperCase: pwContainsUpperCase,
+      pwContainsNumber   : pwContainsNumber,
+      pwContains8OrMore  : pwContains8OrMore,
+    }));
   }
   
   render() {
@@ -76,24 +111,36 @@ class RegisterApp extends React.Component {
     return (
       <div className="RegisterApp">
         <div id="register-page">
-          <div id="form-title">Inscription</div>
-          <div className="form-input">
-            <input type="text" required ref={this.mailInput} maxLength="255"/>
-            <div className="placeholder">Adresse mail</div> 
+          <div className="register-form">
+            <div id="form-title">Inscription</div>
+            <div className="form-input">
+              <input type="text" required ref={this.mailInput} maxLength="255"/>
+              <div className="placeholder">Adresse mail</div> 
+            </div>
+            <div className="form-input">
+              <input type="text" required ref={this.pseudoInput} maxLength="255"/>
+              <div className="placeholder">Pseudo</div>
+            </div>
+            <div className="form-input">
+              <input type="password" required ref={this.pwInput} maxLength="255"/>
+              <div className="placeholder">Mot de passe</div>
+            </div>
+            <div className="login-button">
+              <Button label="S'enregistrer" action={() => this.register()}/>
+            </div>
           </div>
-          <div className="form-input">
-            <input type="text" required ref={this.pseudoInput} maxLength="255"/>
-            <div className="placeholder">Pseudo</div>
-          </div>
-          <div className="form-input">
-            <input type="password" required ref={this.pwInput} maxLength="255"/>
-            <div className="placeholder">Mot de passe</div>
-          </div>
-          <div className="login-button">
-            <Button label="S'enregistrer" action={() => this.register()}/>
+          <div className="separator-register"></div>
+          <div className="password-rules-wrapper">
+            <div>Le mot de passe contient :</div>
+            <div className="password-rules">
+              <div> {this.state.pwContainsLowerCase && "✓"} au moins une lettre minuscule</div>
+              <div> {this.state.pwContainsUpperCase && "✓"} au moins une lettre majuscule</div>
+              <div> {this.state.pwContainsNumber    && "✓"} au moins un chiffre</div>
+              <div> {this.state.pwContains8OrMore   && "✓"} au moins 8 caractères</div>
+            </div>
           </div>
         </div>
-        <div className="pop-up-wrapper">{popUp}</div>
+          <div className="pop-up-wrapper">{popUp}</div>
       </div>
     );
   }

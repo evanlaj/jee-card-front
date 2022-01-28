@@ -12,7 +12,15 @@ import { delay } from '../scripts/anim-util';
 import React from 'react';
 
 const STARTING_HP = 7;
-const MEMORY_RULES = "ECRIRE LES REGLES ICI"
+const MEMORY_RULES = `Comment jouer au Memory ?
+
+Le but du jeu est de retrouver toutes les paires de cartes identiques.
+C'est un jeu à 1 joueur. Au début de la partie, vous avez 2,4 secondes pour mémoriser le plateau.
+Ensuite, les cartes vont se retourner. Vous pourrez alors cliquer sur les cartes pour retrouver les paires.
+Si vous vous trompez, les cartes reviendront face cachée et vous perdrez une vie.
+Si vous retrouvez une paire, les cartes restent face découverte sur le plateau.
+Vous perdez lorsque votre compteur de vie arrive à zéro.
+`;
 
 class MemoryApp extends React.Component {
   

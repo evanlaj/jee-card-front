@@ -12,7 +12,15 @@ import RuleModal from '../components/RuleModal';
 
 import './css/BlackJackApp.css';
 
-const BLACKJACK_RULES = "ECRIRE LES REGLES ICI";
+const BLACKJACK_RULES = `Comment jouer au Black Jack ?
+
+Après avoir reçu deux cartes, le joueur tire des cartes pour s’approcher de la valeur 21 sans la dépasser, grâce au bouton tirer.
+Le but du joueur est de battre l'ordinateur en obtenant un total de points supérieur à celui-ci ou en voyant ce dernier dépasser 21.
+Chaque carte numérotée de 2 à 10 a sa valeur nominale (égale au numéro sur la carte). Les valets, les dames et les rois (les figures), ont une valeur de 10 points.
+Un As vaut 11 points, sauf s'il fait dépasser le score total, auquel cas il en vaut 1.
+Il y a blackjack lorsque le joueur reçoit 2 cartes totalisant une valeur de 21 lors de la donne initiale (un As et un 10 ou une figure).
+Vous perdez si vous-même dépassez 21.
+`;
 
 class BlackJackApp extends React.Component {
 

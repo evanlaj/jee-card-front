@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from '../scripts/router_hoc';
 import { getSession, validateToken, logout } from '../_actions/session';
-import { getGameHistory } from '../_actions/api_actions';
+import { getGameHistory, changeUserName } from '../_actions/api_actions';
 
 import Button from '../components/Button';
 
@@ -11,6 +11,9 @@ class ProfilApp extends React.Component {
 
   constructor() {
     super();
+
+    this.newUsername = React.createRef();
+
     this.state = {};
   }
 
@@ -41,6 +44,15 @@ class ProfilApp extends React.Component {
     });
   }
 
+  async changeUserNameAndReload() {
+    let username = this.newUsername.current.value;
+
+    console.log(username);
+
+    await changeUserName(username);
+    window.location.reload();
+  }
+
   logoutAndReload() {
     logout();
     window.location.reload();
@@ -69,9 +81,19 @@ class ProfilApp extends React.Component {
       <div className="ProfilApp">
         <div id="profil-page">
           <div className="profil-header">
-            <div>Profile // connecté en tant que {this.state.username}.</div>
+            <div>Profil // connecté en tant que {this.state.username}.</div>
             <Button label="Se déconnecter" action={() => this.logoutAndReload() }/>
           </div>
+          <div className="profil-separator"></div>
+          <div className="profil-header">
+            <div className="form-input input-profil">
+              <input type="text" ref={this.newUsername} required/>
+              <div className="placeholder">Nom d'utilisateur</div> 
+            </div>
+            <Button label="Changer de nom d'utilisateur" action={() => this.changeUserNameAndReload() }/>
+          </div>
+          <div className="profil-separator"></div>
+          <div>Historique des parties</div>
           <div className="history-grid">
             <div className="grid-header">Nom du jeu</div>
             <div className="grid-header">Résultat</div>

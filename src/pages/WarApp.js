@@ -13,8 +13,14 @@ import RuleModal from '../components/RuleModal';
 
 import './css/WarApp.css';
 
-const WAR_RULES = "ECRIRE LES REGLES ICI";
+const WAR_RULES = `Comment jouer à la bataille ?
 
+Pour commencer, chaque joueur (l'ordinateur, et vous) a un paquet de cartes mélangées avec le même nombre de cartes face cachée.
+A chaque tour, vous devez cliquer sur le bouton "Jouer" pour révéler votre carte et que l'ordinateur révèle la sienne.
+La carte la plus forte entre les deux gagne le tour, le joueur ayant la carte la plus forte ramasse les deux cartes.
+Dans un tour, si les deux cartes révélées sont de même valeur, une bataille s'enclenche : automatiquement, une carte face cachée viendra recouvrir la carte des joueurs, puis encore une autre face découverte.
+La carte la plus forte emporte alors toutes les cartes posées. Le gagnant d’une partie de bataille est celui aura dans son paquet de cartes toutes les cartes du jeu.
+`;
 class WarApp extends React.Component {
 
   constructor() {

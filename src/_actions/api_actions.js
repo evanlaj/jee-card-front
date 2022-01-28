@@ -247,4 +247,38 @@ async function getGameHistory() {
   .then((response) => response.data);
 }
 
-export {authenticate, getDataFromToken, getNewToken, saveUser, checkAvailability, getUserList, getGameList, setGameAvailability, sendGameSummary, getGameHistory, deleteUser}
+async function changeUserName(newName) {
+  let tokenIsValid = await validateToken();
+
+  if(!tokenIsValid) return false;
+
+  let accessToken = localStorage.getItem('access_token');
+
+  let newUsernameDTO = {
+    username : newName,
+  };
+
+  return await axios
+  .put(URL_BACKEND + "users/username", newUsernameDTO, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+  .catch((error) => error)
+  .then((response) => response.data);
+}
+
+export {
+  authenticate, 
+  getDataFromToken, 
+  getNewToken, 
+  saveUser, 
+  checkAvailability, 
+  getUserList, 
+  getGameList, 
+  setGameAvailability, 
+  sendGameSummary, 
+  getGameHistory, 
+  deleteUser, 
+  changeUserName
+}
