@@ -32,6 +32,7 @@ class RegisterApp extends React.Component {
   }
 
   componentDidMount() {
+    if(localStorage.getItem('access_token')) return;
     this.pwInput.current.addEventListener('input', (e) => { this.checkPasswordValidity(); });
   }
   
