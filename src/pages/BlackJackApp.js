@@ -8,8 +8,11 @@ import { checkAvailability, sendGameSummary } from '../_actions/api_actions';
 import BlackJackHand from '../components/BlackJackHand';
 import CardPile from '../components/CardPile';
 import EndModal from '../components/EndModal';
+import RuleModal from '../components/RuleModal';
 
 import './css/BlackJackApp.css';
+
+const BLACKJACK_RULES = "ECRIRE LES REGLES ICI";
 
 class BlackJackApp extends React.Component {
 
@@ -225,6 +228,7 @@ class BlackJackApp extends React.Component {
           </div>
         </div>
         {endModal}
+        <RuleModal text={BLACKJACK_RULES}/>
       </div>
     )
   }

@@ -2,6 +2,7 @@ import './css/MemoryApp.css';
 import Card from '../components/Card';
 import CardPile from '../components/CardPile';
 import EndModal from '../components/EndModal';
+import RuleModal from '../components/RuleModal';
 
 import { getShuffle } from '../scripts/cards-util';
 import { withRouter } from '../scripts/router_hoc';
@@ -11,6 +12,8 @@ import { delay } from '../scripts/anim-util';
 import React from 'react';
 
 const STARTING_HP = 7;
+const MEMORY_RULES = "ECRIRE LES REGLES ICI"
+
 class MemoryApp extends React.Component {
   
   currentCard;
@@ -230,6 +233,7 @@ class MemoryApp extends React.Component {
           {cardList}
         </div>
         {endModal}
+        <RuleModal text={MEMORY_RULES}/>
       </div>
     );
   }

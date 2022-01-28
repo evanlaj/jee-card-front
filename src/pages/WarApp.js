@@ -9,8 +9,11 @@ import WarBoard from '../components/WarBoard';
 import CardPile from '../components/CardPile';
 import EndModal from '../components/EndModal';
 import PopUp    from '../components/PopUp';
+import RuleModal from '../components/RuleModal';
 
 import './css/WarApp.css';
+
+const WAR_RULES = "ECRIRE LES REGLES ICI";
 
 class WarApp extends React.Component {
 
@@ -227,6 +230,7 @@ class WarApp extends React.Component {
         <div className="player-board"><WarBoard ref={this.playerBoard}/></div>
         <div className="war-popup">{warPopup}</div>
         {endModal}
+        <RuleModal text={WAR_RULES}/>
       </div>
     )
   }
