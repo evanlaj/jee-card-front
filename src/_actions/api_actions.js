@@ -72,6 +72,26 @@ async function saveUser(pseudo, mail, pw) {
   return success;
 }
 
+async function deleteUser(mail) {
+  let tokenIsValid = await validateToken();
+
+  if(!tokenIsValid) return false;
+
+  let accessToken = localStorage.getItem('access_token');
+
+  return await axios
+  .delete(URL_BACKEND + "users", {
+    params: { 
+      mail: mail 
+    },
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+  .catch((error) => error)
+  .then((response) => response.data);
+}
+
 async function getDataFromToken() {
 
   let tokenIsValid = await validateToken();
@@ -132,4 +152,99 @@ async function checkAvailability(gameName) {
   return success;
 }
 
-export {authenticate, getDataFromToken, getNewToken, saveUser, checkAvailability}
+async function getUserList() {
+  let tokenIsValid = await validateToken();
+
+  if(!tokenIsValid) return false;
+
+  let accessToken = localStorage.getItem('access_token');
+
+  return await axios
+  .get(URL_BACKEND + "users", {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+  .catch((error) => error)
+  .then((response) => response.data);
+}
+
+async function getGameList() {
+  let tokenIsValid = await validateToken();
+
+  if(!tokenIsValid) return false;
+
+  let accessToken = localStorage.getItem('access_token');
+
+  return await axios
+  .get(URL_BACKEND + "games", {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+  .catch((error) => error)
+  .then((response) => response.data);
+}
+
+async function setGameAvailability(gameId, available) {
+  let tokenIsValid = await validateToken();
+
+  if(!tokenIsValid) return false;
+
+  let accessToken = localStorage.getItem('access_token');
+
+  let gameAvailabilityDTO = {
+    gameId : gameId,
+    available : available,
+  };
+
+  return await axios
+  .post(URL_BACKEND + "games/availability", gameAvailabilityDTO, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+  .catch((error) => error)
+  .then((response) => response.data);
+}
+
+async function sendGameSummary(game, victory) {
+  let tokenIsValid = await validateToken();
+
+  if(!tokenIsValid) return false;
+
+  let accessToken = localStorage.getItem('access_token');
+
+  let gameSummaryDTO = {
+    game : game,
+    victory : victory,
+  };
+
+  return await axios
+  .post(URL_BACKEND + "users/newgame", gameSummaryDTO, {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+  .catch((error) => error)
+  .then((response) => response.data);
+}
+
+async function getGameHistory() {
+  let tokenIsValid = await validateToken();
+
+  if(!tokenIsValid) return false;
+
+  let accessToken = localStorage.getItem('access_token');
+
+  return await axios
+  .get(URL_BACKEND + "users/history", {
+    headers: {
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+  .catch((error) => error)
+  .then((response) => response.data);
+}
+
+export {authenticate, getDataFromToken, getNewToken, saveUser, checkAvailability, getUserList, getGameList, setGameAvailability, sendGameSummary, getGameHistory, deleteUser}

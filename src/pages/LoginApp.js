@@ -32,7 +32,7 @@ class LoginApp extends React.Component {
 
     console.log(success);
 
-    if(success) this.props.navigate("/");
+    if(success) this.props.navigate("/profil");
     else { 
       this.setState(() => ({ message: "Adresse mail ou mot de passe incorrect" }), () => { 
         this.removeMessage();

@@ -10,6 +10,8 @@ import BlackJackApp from '../pages/BlackJackApp';
 import WarApp from '../pages/WarApp';
 import LoginApp from '../pages/LoginApp';
 import RegisterApp from '../pages/RegisterApp';
+import AdminApp from '../pages/AdminApp';
+import ProfilApp from '../pages/ProfilApp';
 
 class MainApp extends React.Component {
   
@@ -46,13 +48,15 @@ class MainApp extends React.Component {
         <BrowserRouter>
           <Header open={this.headerOpen} buttonAction={this.toggleHeader} session={this.state.session}/>
           <Routes>
-            <Route exact path='/'          element={<HomePageApp />}  />
-            <Route exact path='/pile'      element={<TestApp />}      />
-            <Route exact path='/memory'    element={<TestApp />}      />
-            <Route exact path='/blackjack' element={<BlackJackApp />} />
-            <Route exact path='/war'       element={<WarApp />}       />
-            <Route exact path="/login"     element={<LoginApp />}     />
-            <Route exact path="/register"  element={<RegisterApp />}  />
+            <Route exact path='/'               element={<HomePageApp />}  />
+            <Route exact path='/pile'           element={<TestApp />}      />
+            <Route exact path='/memory'         element={<TestApp />}      />
+            <Route exact path='/blackjack'      element={<BlackJackApp />} />
+            <Route exact path='/war'            element={<WarApp />}       />
+            <Route exact path="/login"          element={<LoginApp />}     />
+            <Route exact path="/register"       element={<RegisterApp />}  />
+            <Route exact path="/administration" element={<AdminApp />}     />
+            <Route exact path="/profil"         element={<ProfilApp />}    />
           </Routes>
         </BrowserRouter>
         {/* ON PEUT METTRE DES CHOSES APRÈS */}

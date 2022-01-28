@@ -12,6 +12,8 @@ class Session {
     if (localStorage.getItem("access_token") !== null) {
       let data = await getDataFromToken();
 
+      if(!data) logout();
+
       this.name = data.username;
       this.mail = data.mail;
       this.role = data.role;
@@ -57,6 +59,8 @@ function parseJwt(token) {
 
 async function validateToken() {
   let accessToken = localStorage.getItem("access_token");
+
+  if(!accessToken) return false;
   
   if(parseJwt(accessToken).exp < Date.now() / 1000) {
     console.log("INFO : access_token expired, trying to get new token");

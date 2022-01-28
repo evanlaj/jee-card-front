@@ -1,35 +1,26 @@
-.HomePageApp {
+.ProfilApp {
   display: flex;
   background-color: var(--baize-green);
   min-height: 100vh;
-  padding: 0;
-  align-items: center;
+  padding: 170px 0;
   justify-content: center;
 }
 
-#home-page {
+#profil-page {
   position: relative;
-  height: 340px;
+  min-height: calc(100% - 340px);
   width: 1096px;
   background: var(--card-bg);
   border-radius: 10px;
   outline-offset: -20px;
 
-  padding-top: 40px;
-
-  display: flex;
-  gap: 80px;
-  flex-direction: column;
-
-  align-items: center;
-  justify-content: center;
+  padding: 60px 80px 80px;
 
   font-size: 18px;
   font-family: 'Jetbrains Mono';
-  text-align: center;
 }
 
-#home-page:before {
+#profil-page:before {
   pointer-events: none;
   position: absolute;
   content: '';
@@ -46,11 +37,28 @@
   border: 10px solid var(--baize-green);
 }
 
-.home-page-buttons {
+.profil-header {
   display: flex;
-  gap: 160px;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.home-page-buttons > * {
-  color: var(--card-black);
+.history-grid {
+  grid-template-columns: 2fr 1fr;
+  margin-top: 32px;
+  display: grid;
+  border-radius: 6px;
+  overflow: hidden;
+  border: #C4C4C4 1px solid;
+}
+
+.history-grid > div {
+  min-height: 52px;
+}
+
+.history-grid > div:not(.grid-header) {
+  border: #C4C4C4 1px solid;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
 }

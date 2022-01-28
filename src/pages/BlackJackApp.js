@@ -3,7 +3,7 @@ import { getShuffle, getMultipleDecks } from '../scripts/cards-util';
 import { delay } from '../scripts/anim-util';
 import { withRouter } from '../scripts/router_hoc';
 
-import { checkAvailability } from '../_actions/api_actions';
+import { checkAvailability, sendGameSummary } from '../_actions/api_actions';
 
 import BlackJackHand from '../components/BlackJackHand';
 import CardPile from '../components/CardPile';
@@ -172,6 +172,8 @@ class BlackJackApp extends React.Component {
       this.endModalInfo.title = "Égalité";
     }
 
+    sendGameSummary("Black Jack", playerWon);
+
     this.forceUpdate();
   }
 
@@ -189,7 +191,7 @@ class BlackJackApp extends React.Component {
   }
 
   quitGame() {
-    this.props.navigate("/");
+    this.props.navigate("/profil");
   }
 
   render() {

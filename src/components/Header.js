@@ -12,6 +12,11 @@ function Header({open =  true, buttonAction = () => null, session = null}) {
       <div className="header-bar bar2"></div>
       <div className="header-bar bar3"></div>
     </button>;
+
+  let adminButton = null;
+  if(session && (session.role === "ROLE_ADMIN")) {
+    adminButton = <NavLink to="/administration"><Button label="Administration"/></NavLink>
+  }
   
   if(session && session.name) {
     return (
@@ -22,7 +27,8 @@ function Header({open =  true, buttonAction = () => null, session = null}) {
               <NavLink to="/war"><Button label="Bataille"/></NavLink>
               <NavLink to="/blackjack"><Button label="Blackjack"/></NavLink>
               <NavLink to="/memory"><Button label="Memory"/></NavLink>
-              <NavLink to="/"><Button label="Page d'accueil"/></NavLink>
+              {adminButton}
+              <NavLink to="/profil"><Button label="Profile"/></NavLink>
             </nav>
           }
       </div>

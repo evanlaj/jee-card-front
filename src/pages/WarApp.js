@@ -3,7 +3,7 @@ import { getShuffle, getFullDeck } from '../scripts/cards-util';
 import { delay } from '../scripts/anim-util';
 import { withRouter } from '../scripts/router_hoc';
 
-import { checkAvailability } from '../_actions/api_actions';
+import { checkAvailability,sendGameSummary } from '../_actions/api_actions';
 
 import WarBoard from '../components/WarBoard';
 import CardPile from '../components/CardPile';
@@ -44,10 +44,8 @@ class WarApp extends React.Component {
     this.setState(() => ({
       canAccess : canAccess
     }), () => {
-      if(!this.state.canAccess) this.props.navigate("/");
+      if(!this.state.canAccess) this.props.navigate("/profil");
     });
-
-    if(!localStorage.getItem('access_token')) this.props.navigate("/");
   }
 
   async startGame() {
@@ -185,6 +183,8 @@ class WarApp extends React.Component {
     this.endModalInfo.title = "Victoire";
     this.endModalInfo.show = true;
 
+    sendGameSummary("Black Jack", playerWon);
+    
     this.forceUpdate();
   }
 
