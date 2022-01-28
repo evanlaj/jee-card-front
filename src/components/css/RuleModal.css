@@ -1,0 +1,91 @@
+.rule-button {
+    position: relative;
+    position: absolute;
+    cursor: pointer;
+    top: 68px;
+    right: 20px;
+  
+    height: 30px;
+    width: 30px;
+
+    transition: all 0.2s ease-in-out;
+
+    background: var(--chalk-white);
+
+    border-radius: 50%;
+  
+    border: none;
+}
+
+.rule-button:focus, .rule-button:hover {
+outline: none;
+background: var(--card-bg);
+}
+
+.rule-button:before {
+    position: absolute;
+    content: '?';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    color: var(--baize-green);
+    font-family: "Jetbrains Mono";
+    font-size: 16px;
+}
+
+.rulebook {
+    position: absolute;
+    top: 68px;
+    right: 70px;
+    padding: 60px;
+
+    min-height: 200px;
+    min-width: 200px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+    text-align: justify;
+
+    background: white;
+}
+
+.rulebook > * {
+    font-family: 'Jetbrains Mono';
+}
+
+.rulebook:before {
+    pointer-events: none;
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: calc(100% - 40px);
+    width: calc(100% - 40px);
+
+    border-radius: 6px;
+    border: 10px solid var(--baize-green);
+}
+
+.rules {
+    display: block;
+    height: 100%;
+    width: 100%;
+    max-width: 560px;
+    max-height: 720px;
+    white-space: pre-line;
+    overflow: auto;
+}
+
+.rule-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+}
