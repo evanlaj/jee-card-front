@@ -37,6 +37,13 @@
   border: 10px solid var(--baize-green);
 }
 
+.user-grid-atop {
+  margin: 48px 0 -8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .user-grid, .game-grid {
   margin-top: 32px;
   display: grid;

@@ -68,6 +68,22 @@ class AdminApp extends React.Component {
     });
   }
 
+  downloadJSON() {
+
+    let text = JSON.stringify(this.state.userList, null, " ");
+
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', 'users.json');
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+  }
+
   render() {
 
     let userTable = [];
@@ -101,6 +117,11 @@ class AdminApp extends React.Component {
             <div className="grid-header">Activer</div>
             {gameTable}
           </div>
+          <div className="user-grid-atop">
+            <div>Liste des utilisateurs</div>
+            <Button label="Télécharger la liste au format JSON" action={() => this.downloadJSON() }/>
+          </div>
+
           <div className="user-grid">
             <div className="grid-header">Adresse mail</div>
             <div className="grid-header">Nom</div>
